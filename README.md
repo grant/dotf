@@ -1,2 +1,2 @@
-# .file
-.file - Manage custom dotfiles.
+# dotf
+dotf - Manage custom dotfiles.
