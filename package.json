@@ -1,0 +1,19 @@
+{
+  "name": "dotf",
+  "version": "0.1.0",
+  "description": "Dotfile manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grant/dotf.git"
+  },
+  "author": "Grant Timmerman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grant/dotf/issues"
+  },
+  "homepage": "https://github.com/grant/dotf#readme"
+}
