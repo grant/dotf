@@ -1,6 +1,6 @@
 # dotf
 
-Manage multiple dotfile.
+Manage multiple dotfiles.
 
 ```sh
 yarn add dotf
@@ -8,30 +8,39 @@ yarn add dotf
 
 ## Features
 
+- Supports multiple dotfiles
 - Absolute or relative dotfiles
 
 ## Example
 
 ```js
-let dotf = require('dotf');
+import dotf from 'dotf';
 
-let dotrc = dotf('~/myrc'); // Global (~)
-let dotignore = dotf('./myignore'); // Local (./)
-let dotsettings = dotf('mysettings'); // Local (./)
+// Setup dotfiles
+let dotglobal = dotf('~', 'myrc'); // Global (~)
+let dotlocal = dotf(__dirname, 'myignore'); // Local (./)
 
-dotrc.exists().then((exists) => {
-  // boolean
-  console.log(exists);
-})
+// Write
+let overwriteGlobal = await dotglobal.write({ myGlobal: 1337 });
+let overwriteLocal = await dotlocal.write({ myLocal: 2674 });
 
-dotrc.read().then((data) => {
-  // read data
-  console.log(data);
-})
+// Exists
+let globalExists = await dotglobal.exists();
+let localExists = await dotlocal.exists();
 
-dotrc.write({a: 1}).then((data) => {
-  // overwrote data
-  console.log(data);
-});
+// Read
+let globalRead = await dotglobal.read();
+let localRead = await dotlocal.read();
+```
 
+## Why not use XXX instead?
+
+- I didn't see support for custom paths in dotfile in other packages (i.e. /dotfile).
+- This module provides 1 liner read/write/existance with the modern await syntax.
+
+## Tests (ava)
+
+```sh
+yarn
+npm test
 ```
