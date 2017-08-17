@@ -28,7 +28,7 @@ module.exports = (dirname, name) => {
     }),
     read: () => new Promise((resolve, reject) => {
       jsonfile.readFile(fullpath, (err, obj) => {
-        if (err) return console.error(err);
+        if (err) return reject(err);
         resolve(obj);
       });
     }),
