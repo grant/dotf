@@ -37,6 +37,10 @@ module.exports = (dirname, name) => {
         if (err) return reject(err);
         resolve(obj);
       })
+    }),
+    delete: () => new Promise((resolve, reject) => {
+      fs.unlinkSync(fullpath);
+      resolve();
     })
   };
 };
