@@ -1,4 +1,4 @@
-<h1>dotf <a href="https://travis-ci.org/grant/dotf"><img src="https://travis-ci.org/grant/dotf.svg?branch=master" alt="Build Status"></a>
+<h1>dotf <a href="https://travis-ci.org/grant/dotf"><img src="https://travis-ci.org/grant/dotf.svg?branch=master" alt="Build Status"></a> <a href="https://www.npmjs.com/package/dotf"><img src="https://img.shields.io/npm/v/dotf.svg" alt="npm Version"></a>
 </h1>
 
 Manage multiple dotfiles.
