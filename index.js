@@ -1,9 +1,7 @@
 const fs = require('fs');
-const jsonfile = require('jsonfile')
+const jsonfile = require('jsonfile');
 const os = require('os');
 const path = require('path');
-const resolveFile = require('resolve-file');
-const resolvePath = require('resolve-path');
 
 /**
  * Read, Write, or Exist Dotfiles
@@ -19,8 +17,8 @@ module.exports = (dirname, name) => {
   if (dirname.charAt(0) === '~') {
     dirname = os.homedir();
   }
-  let filename = `.${name}`;
-  let fullpath = path.join(dirname, filename);
+  const filename = `.${name}`;
+  const fullpath = path.join(dirname, filename);
 
   return {
     exists: () => new Promise((resolve, reject) => {
@@ -35,13 +33,13 @@ module.exports = (dirname, name) => {
     write: (obj) => new Promise((resolve, reject) => {
       jsonfile.writeFile(fullpath, obj, (err) => {
         if (err) return reject(err);
-        fs.chmodSync(fullpath, 0600);
+        fs.chmodSync(fullpath, 600);
         resolve(obj);
-      })
+      });
     }),
     delete: () => new Promise((resolve, reject) => {
       fs.unlinkSync(fullpath);
       resolve();
-    })
+    }),
   };
 };

@@ -4,7 +4,8 @@
   "description": "Dotfile manager",
   "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "lint": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,9 @@
   },
   "homepage": "https://github.com/grant/dotf#readme",
   "devDependencies": {
-    "ava": "^0.21.0"
+    "ava": "^0.21.0",
+    "eslint": "^5.9.0",
+    "eslint-config-google": "^0.11.0"
   },
   "dependencies": {
     "jsonfile": "^3.0.1",
