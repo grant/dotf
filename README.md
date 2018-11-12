@@ -1,4 +1,4 @@
-<h1>dotf <a href="https://travis-ci.org/google/clasp"><img src="https://travis-ci.org/google/clasp.svg?branch=master" alt="Build Status"></a>
+<h1>dotf <a href="https://travis-ci.org/grant/dotf"><img src="https://travis-ci.org/grant/dotf.svg?branch=master" alt="Build Status"></a>
 </h1>
 
 Manage multiple dotfiles.
