@@ -14,12 +14,10 @@ test('write', async (t) => {
   const dotlocal = dotf(__dirname, 'myignore1'); // Local (./)
   const writeGlobal = await dotglobal.write({a: 1});
   const writeLocal = await dotlocal.write({a: 1});
-  if ('600' !== (fs.statSync(dotglobalfullpath).mode &&
-      parseInt(777, 8)).toString(8)) {
+  if ('600' !== (fs.statSync(dotglobalfullpath).mode & parseInt(777, 8)).toString(8)) {
     t.fail();
   }
-  if ('600' !== (fs.statSync(dotlocalfullpath).mode &&
-      parseInt(777, 8)).toString(8)) {
+  if ('600' !== (fs.statSync(dotlocalfullpath).mode & parseInt(777, 8)).toString(8)) {
     t.fail();
   }
   t.pass();
