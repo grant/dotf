@@ -33,7 +33,7 @@ module.exports = (dirname, name) => {
     write: (obj) => new Promise((resolve, reject) => {
       jsonfile.writeFile(fullpath, obj, (err) => {
         if (err) return reject(err);
-        //same as chmod 600
+        // same as chmod 600
         fs.chmodSync(fullpath, fs.constants.S_IRUSR | fs.constants.S_IWUSR);
         resolve(obj);
       });
