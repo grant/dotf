@@ -14,12 +14,16 @@ test('write', async (t) => {
   const dotlocal = dotf(__dirname, 'myignore1'); // Local (./)
   const writeGlobal = await dotglobal.write({a: 1});
   const writeLocal = await dotlocal.write({a: 1});
-  if ('600' !== (fs.statSync(dotglobalfullpath).mode &&
-      parseInt(777, 8)).toString(8)) {
+
+  // If file permission is incorrect,
+  // {{file permission value} logical AND {777 in octal}}
+  // !== {correct permission value}.
+  if ((fs.statSync(dotglobalfullpath).mode & 0o777) !== (fs.constants.S_IRUSR
+     | fs.constants.S_IWUSR)) {
     t.fail();
   }
-  if ('600' !== (fs.statSync(dotlocalfullpath).mode &&
-      parseInt(777, 8)).toString(8)) {
+  if ((fs.statSync(dotlocalfullpath).mode & 0o777) !== (fs.constants.S_IRUSR
+     | fs.constants.S_IWUSR)) {
     t.fail();
   }
   t.pass();
