@@ -17,12 +17,12 @@ test('write', async (t) => {
 
   // If file permission is incorrect,
   // {{file permission value} logical AND {777 in octal}}
-  // != {correct permission value}.
-  if ((fs.statSync(dotglobalfullpath).mode & 0o777) != (fs.constants.S_IRUSR
+  // !== {correct permission value}.
+  if ((fs.statSync(dotglobalfullpath).mode & 0o777) !== (fs.constants.S_IRUSR
      | fs.constants.S_IWUSR)) {
     t.fail();
   }
-  if ((fs.statSync(dotlocalfullpath).mode & 0o777) != (fs.constants.S_IRUSR
+  if ((fs.statSync(dotlocalfullpath).mode & 0o777) !== (fs.constants.S_IRUSR
      | fs.constants.S_IWUSR)) {
     t.fail();
   }
