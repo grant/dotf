@@ -15,16 +15,19 @@ test('write', async (t) => {
   const writeGlobal = await dotglobal.write({a: 1});
   const writeLocal = await dotlocal.write({a: 1});
 
-  // If file permission is incorrect,
-  // {{file permission value} logical AND {777 in octal}}
-  // !== {correct permission value}.
-  if ((fs.statSync(dotglobalfullpath).mode & 0o777) !== (fs.constants.S_IRUSR
-     | fs.constants.S_IWUSR)) {
-    t.fail();
-  }
-  if ((fs.statSync(dotlocalfullpath).mode & 0o777) !== (fs.constants.S_IRUSR
-     | fs.constants.S_IWUSR)) {
-    t.fail();
+  // if a platform is not Windows(include x64)
+  if ('win32' !== process.platform) {
+    // If file permission is incorrect,
+    // {{file permission value} logical AND {777 in octal}}
+    // !== {correct permission value}.
+    if ((fs.statSync(dotglobalfullpath).mode & 0o777) !== (fs.constants.S_IRUSR
+      | fs.constants.S_IWUSR)) {
+      t.fail();
+    }
+    if ((fs.statSync(dotlocalfullpath).mode & 0o777) !== (fs.constants.S_IRUSR
+      | fs.constants.S_IWUSR)) {
+      t.fail();
+    }
   }
   t.pass();
   await dotglobal.delete();
