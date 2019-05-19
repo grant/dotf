@@ -1,0 +1,17 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "rootDirs": ["src", "test"],
+    // "outDir": "lib/",
+    "declaration": true,
+    "target": "es2015",
+    "lib": [
+      "es2018"
+    ],
+    "module": "commonjs",
+    "strict": true,
+    // "inlineSourceMap": true,
+  },
+  "moduleResolution": "node",
+  "exclude": ["test"]
+}
