@@ -1,7 +1,7 @@
 declare const _default: (dirname: string, name: string) => {
     exists: () => Promise<boolean>;
     read: () => Promise<any>;
-    write: (obj: any) => Promise<any>;
+    write: <T extends any>(obj: T) => Promise<T>;
     delete: () => Promise<void>;
 };
 /**
