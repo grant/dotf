@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import dotf from '../src';
 import test from 'ava';
+import dotf from '../src/index';
 import fs = require('fs');
 import path = require('path');
 import os = require('os');
