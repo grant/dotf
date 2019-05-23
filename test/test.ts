@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import dotf from '.';
 import test from 'ava';
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
+import dotf from '../src/index';
+import fs = require('fs');
+import path = require('path');
+import os = require('os');
 
 // Creates
 test('write', async (t) => {
