@@ -1,10 +1,8 @@
 import { chmodSync, constants, exists, unlinkSync } from 'fs';
-import { homedir } from 'os';
-import { join } from 'path';
 import { readFile, writeFile } from 'jsonfile';
 
-// tslint:disable-next-line:no-any
-type jsonAny = any;
+import { homedir } from 'os';
+import { join } from 'path';
 
 /**
  * Read, Write, or Exist Dotfiles
@@ -27,13 +25,13 @@ export default (dirname: string, name: string) => {
     exists: () => new Promise<boolean>((resolve, reject) => {
       exists(fullpath, resolve);
     }),
-    read: () => new Promise<jsonAny>((resolve, reject) => {
+    read: () => new Promise<any>((resolve, reject) => { // tslint:disable-line: no-any
       readFile(fullpath, (err, obj) => {
         if (err) return reject(err);
         resolve(obj);
       });
     }),
-    write: <T extends jsonAny>(obj: T) => new Promise<T>((resolve, reject) => {
+    write: <T>(obj: T) => new Promise<T>((resolve, reject) => {
       writeFile(fullpath, obj, (err) => {
         if (err) return reject(err);
         // if a platform is not Windows(include x64)
