@@ -21,10 +21,10 @@
   "homepage": "https://github.com/grant/dotf#readme",
   "devDependencies": {
     "@types/jsonfile": "^5.0.0",
-    "@types/node": "^8.10.0",
+    "@types/node": "^8.10.48",
     "ava": "^1.4.1",
     "ts-node": "^8.1.0",
-    "tslint": "^5.11.0",
+    "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
   "dependencies": {
