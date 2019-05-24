@@ -1,2 +1,6 @@
-!*.d.ts
-*.ts
+.eslintrc.js
+.travis.yml
+src
+test
+ts*.json
+!lib

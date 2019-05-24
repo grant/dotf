@@ -1,16 +1,23 @@
-import { chmodSync, constants, exists, unlinkSync } from 'fs';
+import { chmodSync, constants, exists, existsSync, unlinkSync } from 'fs';
 import { readFile, writeFile } from 'jsonfile';
 
 import { homedir } from 'os';
 import { join } from 'path';
 
+export interface Dotfile {
+  exists: () => Promise<boolean>;
+  read: <T>() => Promise<T>;
+  write: <T>(obj: T) => Promise<T>;
+  delete: () => Promise<void>;
+}
+
 /**
  * Read, Write, or Exist Dotfiles
  * @param  {__dirname} dirname The relative dirname
  * @param  {string} name The dotfile name
- * @return {object} exists, read, or write Promises
+ * @return {Dotfile} `delete`, `exists`, `read` and `write` Promises
  */
-export default (dirname: string, name: string) => {
+export default (dirname: string, name: string): Dotfile => {
   if (!name || !dirname) {
     throw new Error('Both name and dirname parameters are required');
   }
@@ -22,27 +29,27 @@ export default (dirname: string, name: string) => {
   const fullpath = join(dirname, filename);
 
   return {
-    exists: () => new Promise<boolean>((resolve, reject) => {
-      exists(fullpath, resolve);
-    }),
-    read: () => new Promise<any>((resolve, reject) => { // tslint:disable-line: no-any
-      readFile(fullpath, (err, obj) => {
-        if (err) return reject(err);
-        resolve(obj);
-      });
-    }),
-    write: <T>(obj: T) => new Promise<T>((resolve, reject) => {
-      writeFile(fullpath, obj, (err) => {
-        if (err) return reject(err);
-        // if a platform is not Windows(include x64)
-        if ('win32' !== process.platform) {
-          // same as chmod 600
-          chmodSync(fullpath, constants.S_IRUSR | constants.S_IWUSR);
-        }
-        resolve(obj);
-      });
-    }),
-    delete: () => new Promise<void>((resolve, reject) => {
+    exists: () => new Promise<boolean>((resolve) => resolve(existsSync(fullpath))),
+    read: () => new Promise(
+      (resolve, reject) => readFile(fullpath, (err, obj) => err ? reject(err) : resolve(obj)),
+    ),
+    write: (obj) => new Promise(
+      (resolve, reject) => writeFile(fullpath, obj,
+        (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            // if a platform is not Windows(include x64)
+            if ('win32' !== process.platform) {
+              // same as chmod 600
+              chmodSync(fullpath, constants.S_IRUSR | constants.S_IWUSR);
+            }
+            resolve(obj);
+          }
+        },
+      ),
+    ),
+    delete: () => new Promise<void>((resolve) => {
       unlinkSync(fullpath);
       resolve();
     }),
