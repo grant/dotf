@@ -1,11 +1,12 @@
+import dotf from '../src/index';
 /* eslint-disable no-unused-vars */
 import test from 'ava';
-import dotf from '../src/index';
 import fs = require('fs');
 import path = require('path');
 import os = require('os');
 
 // Creates
+// TODO Make this test simpler
 test('write', async (t) => {
   // overwrite data
   const dotglobalfullpath = path.join(os.homedir(), '.myrc1');
@@ -40,6 +41,8 @@ test('exists', async (t) => {
   await dotlocal.write({a: 1});
   const existsGlobal = await dotglobal.exists();
   const existsLocal = await dotlocal.exists();
+  t.is(existsGlobal, true);
+  t.is(existsLocal, true);
   t.pass();
   await dotglobal.delete();
   await dotlocal.delete();
@@ -48,9 +51,11 @@ test('read', async (t) => {
   const dotglobal = dotf('~', 'myrc3'); // Global (~)
   const dotlocal = dotf(__dirname, 'myignore3'); // Local (./)
   await dotglobal.write({a: 1});
-  await dotlocal.write({a: 1});
+  await dotlocal.write({b: 2});
   const readGlobal = await dotglobal.read();
   const readLocal = await dotlocal.read();
+  t.deepEqual(readGlobal, {a: 1});
+  t.deepEqual(readLocal, {b: 2});
   t.pass();
   await dotglobal.delete();
   await dotlocal.delete();
@@ -58,14 +63,16 @@ test('read', async (t) => {
 test('delete', async (t) => {
   const dotglobal = dotf('~', 'myrc4'); // Global (~)
   const dotlocal = dotf(__dirname, 'myignore4'); // Local (./)
-  dotglobal.write({a: 1}).then(() => {
-    dotglobal.delete().then(() => {
-      t.pass();
-    });
-  });
-  dotlocal.write({a: 1}).then(() => {
-    dotlocal.delete().then(() => {
-      t.pass();
-    });
-  });
+  // Write then delete
+  await dotglobal.write({a: 1});
+  await dotglobal.delete();
+  await dotlocal.write({b: 2});
+  await dotlocal.delete();
+  // Verify deleted
+  await t.throwsAsync(async () => {
+    await dotglobal.read();
+  }, {instanceOf: Error, message: new RegExp('^ENOENT')});
+  await t.throwsAsync(async () => {
+    await dotlocal.read();
+  }, {instanceOf: Error, message: new RegExp('^ENOENT')});
 });

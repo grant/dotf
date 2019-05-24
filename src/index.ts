@@ -1,7 +1,8 @@
 import { chmodSync, constants, exists, existsSync, unlinkSync } from 'fs';
+import { readFile, writeFile } from 'jsonfile';
+
 import { homedir } from 'os';
 import { join } from 'path';
-import { readFile, writeFile } from 'jsonfile';
 
 export interface Dotfile {
   exists: () => Promise<boolean>;
@@ -28,8 +29,8 @@ export default (dirname: string, name: string): Dotfile => {
   const fullpath = join(dirname, filename);
 
   return {
-    exists: () => new Promise((resolve) => resolve(existsSync(fullpath))),
-    read: () => new Promise( // tslint:disable-line: no-any
+    exists: () => new Promise<boolean>((resolve) => resolve(existsSync(fullpath))),
+    read: () => new Promise(
       (resolve, reject) => readFile(fullpath, (err, obj) => err ? reject(err) : resolve(obj)),
     ),
     write: (obj) => new Promise(
@@ -48,7 +49,7 @@ export default (dirname: string, name: string): Dotfile => {
         },
       ),
     ),
-    delete: () => new Promise((resolve) => {
+    delete: () => new Promise<void>((resolve) => {
       unlinkSync(fullpath);
       resolve();
     }),
