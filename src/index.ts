@@ -5,7 +5,7 @@ import { readFile, writeFile } from 'jsonfile';
 
 export interface Dotfile {
   exists: () => Promise<boolean>;
-  read: () => Promise<any>; // tslint:disable-line: no-any
+  read: <T>() => Promise<T>;
   write: <T>(obj: T) => Promise<T>;
   delete: () => Promise<void>;
 }
@@ -28,11 +28,11 @@ export default (dirname: string, name: string): Dotfile => {
   const fullpath = join(dirname, filename);
 
   return {
-    exists: () => new Promise<boolean>((resolve) => resolve(existsSync(fullpath))),
-    read: () => new Promise<any>( // tslint:disable-line: no-any
+    exists: () => new Promise((resolve) => resolve(existsSync(fullpath))),
+    read: () => new Promise( // tslint:disable-line: no-any
       (resolve, reject) => readFile(fullpath, (err, obj) => err ? reject(err) : resolve(obj)),
     ),
-    write: <T>(obj: T) => new Promise<T>(
+    write: (obj) => new Promise(
       (resolve, reject) => writeFile(fullpath, obj,
         (err) => {
           if (err) {
@@ -48,7 +48,7 @@ export default (dirname: string, name: string): Dotfile => {
         },
       ),
     ),
-    delete: () => new Promise<void>((resolve) => {
+    delete: () => new Promise((resolve) => {
       unlinkSync(fullpath);
       resolve();
     }),
