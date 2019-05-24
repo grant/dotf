@@ -4,7 +4,7 @@
 Manage multiple dotfiles.
 
 ```sh
-yarn add dotf
+npm i dotf
 ```
 
 ## Features
@@ -42,6 +42,6 @@ let localRead = await dotlocal.read();
 ## Tests (ava)
 
 ```sh
-yarn
+npm i
 npm test
 ```
