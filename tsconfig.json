@@ -9,6 +9,7 @@
       "es2018"
     ],
     "module": "commonjs",
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "strict": true,
     // "inlineSourceMap": true,
