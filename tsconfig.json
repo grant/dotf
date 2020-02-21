@@ -6,7 +6,7 @@
     "declaration": true,
     "target": "es2015",
     "lib": [
-      "es2018"
+      "ESNext"
     ],
     "module": "commonjs",
     "esModuleInterop": true,
