@@ -17,7 +17,7 @@ export interface Dotfile {
  * @param  {string} name The dotfile name
  * @return {Dotfile} `delete`, `exists`, `read` and `write` Promises
  */
-export default (dirname: string, name: string): Dotfile => {
+const dotf = (dirname: string, name: string): Dotfile => {
   if (!name || !dirname) {
     throw new Error('Both name and dirname parameters are required');
   }
@@ -55,3 +55,9 @@ export default (dirname: string, name: string): Dotfile => {
     }),
   };
 };
+
+export default dotf;
+
+// For CommonJS default export support
+module.exports = dotf;
+Object.defineProperty(module.exports, 'default', { enumerable: false, value: dotf });
