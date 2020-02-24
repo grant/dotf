@@ -1,18 +1,25 @@
-import { chmodSync, constants, exists, existsSync, unlinkSync } from 'fs';
+import { constants, promises as fsPromises } from 'fs';
 import { readFile, writeFile } from 'jsonfile';
-
 import { homedir } from 'os';
 import { join } from 'path';
 
+/**
+ * A convenient object to interact with dot files
+ */
 export interface Dotfile {
-  exists: () => Promise<boolean>;
-  read: <T>() => Promise<T>;
-  write: <T>(obj: T) => Promise<T>;
+  /** delete the file */
   delete: () => Promise<void>;
+  /** check if the file exists */
+  exists: () => Promise<boolean>;
+  /** read the content of the file */
+  read: <T = object>() => Promise<T>;
+  /** write the content of the file */
+  write: <T = object>(obj: T) => Promise<T>;
 }
 
 /**
- * Read, Write, or Exist Dotfiles
+ * Delete, Read, Write, or Exist Dotfiles
+ *
  * @param  {__dirname} dirname The relative dirname
  * @param  {string} name The dotfile name
  * @return {Dotfile} `delete`, `exists`, `read` and `write` Promises
@@ -25,34 +32,19 @@ const dotf = (dirname: string, name: string): Dotfile => {
   if (dirname[0] === '~') {
     dirname = homedir();
   }
-  const filename = `.${name}`;
-  const fullpath = join(dirname, filename);
+  const fullpath = join(dirname, `.${name}`);
 
   return {
-    exists: () => new Promise<boolean>((resolve) => resolve(existsSync(fullpath))),
-    read: () => new Promise(
-      (resolve, reject) => readFile(fullpath, (err, obj) => err ? reject(err) : resolve(obj)),
-    ),
-    write: (obj) => new Promise(
-      (resolve, reject) => writeFile(fullpath, obj,
-        (err) => {
-          if (err) {
-            reject(err);
-          } else {
-            // if a platform is not Windows(include x64)
-            if ('win32' !== process.platform) {
-              // same as chmod 600
-              chmodSync(fullpath, constants.S_IRUSR | constants.S_IWUSR);
-            }
-            resolve(obj);
-          }
-        },
-      ),
-    ),
-    delete: () => new Promise<void>((resolve) => {
-      unlinkSync(fullpath);
-      resolve();
-    }),
+    delete: () => fsPromises.unlink(fullpath),
+    exists: async () => fsPromises.access(fullpath).then(() => true, () => false),
+    read: () => readFile(fullpath),
+    write: process.platform === 'win32'
+    // if a platform is not Windows(include x64)
+    ? obj => writeFile(fullpath, obj).then(() => obj)
+    : obj => writeFile(fullpath, obj)
+      // same as chmod 600
+      .then(() => fsPromises.chmod(fullpath, constants.S_IRUSR | constants.S_IWUSR))
+      .then(() => obj),
   };
 };
 
