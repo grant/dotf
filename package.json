@@ -1,36 +1,39 @@
 {
   "name": "dotf",
-  "version": "1.4.1",
   "description": "Dotfile manager",
-  "files": [
-    "lib"
-  ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "scripts": {
-    "build": "tsc --project tsconfig.json",
-    "watch": "tsc --project tsconfig.json --watch",
-    "dryrun": "npm publish --dry-run",
-    "lint": "tslint --project tsconfig.json && echo 'No lint errors. All good!'",
-    "test": "c8 ava test/test.ts"
-  },
+  "version": "1.4.2",
+  "license": "MIT",
+  "author": "Grant Timmerman",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/grant/dotf.git"
   },
-  "author": "Grant Timmerman",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/grant/dotf/issues"
   },
   "homepage": "https://github.com/grant/dotf#readme",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "dryrun": "npm publish --dry-run",
+    "lint": "tslint --project tsconfig.json && echo 'No lint errors. All good!'",
+    "test": "c8 ava test/test.ts",
+    "watch": "tsc --project tsconfig.json --watch"
+  },
+  "engines": {
+    "node": ">= 10.3.0"
+  },
   "dependencies": {
     "jsonfile": "^5.0.0"
   },
   "devDependencies": {
     "@types/jsonfile": "^5.0.0",
     "@types/node": "^10.17.16",
-    "ava": "^3.3.0",
+    "ava": "^3.4.0",
     "c8": "^7.1.0",
     "ts-node": "^8.6.2",
     "tslint": "^6.0.0",

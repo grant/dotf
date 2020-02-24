@@ -4,14 +4,12 @@
     "rootDir": "src",
     "outDir": "lib",
     "declaration": true,
-    "target": "es2015",
-    "lib": [
-      "ESNext"
-    ],
+    "target": "ES2017",
+    "lib": ["ESNext"],
     "module": "commonjs",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "strict": true,
+    "strict": true
     // "inlineSourceMap": true,
   },
   "include": ["src"]
