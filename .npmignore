@@ -1,6 +1,0 @@
-.eslintrc.js
-.travis.yml
-src
-test
-ts*.json
-!lib
