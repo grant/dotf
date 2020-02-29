@@ -1,16 +1,16 @@
-import dotf from '../src/index';
-/* eslint-disable no-unused-vars */
 import test from 'ava';
-import fs = require('fs');
-import path = require('path');
-import os = require('os');
+import fs from 'graceful-fs';
+import { homedir } from 'os';
+import { join } from 'path';
+
+import dotf from '../src/index';
 
 // Creates
 // TODO Make this test simpler
 test('write', async (t) => {
   // overwrite data
-  const dotglobalfullpath = path.join(os.homedir(), '.myrc1');
-  const dotlocalfullpath = path.join(__dirname, '.myignore1');
+  const dotglobalfullpath = join(homedir(), '.myrc1');
+  const dotlocalfullpath = join(__dirname, '.myignore1');
   const dotglobal = dotf('~', 'myrc1'); // Global (~)
   const dotlocal = dotf(__dirname, 'myignore1'); // Local (./)
   const writeGlobal = await dotglobal.write({a: 1});
