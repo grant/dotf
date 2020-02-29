@@ -5,7 +5,8 @@
 logs
 *.log
 npm-debug.log*
-node_modules/
 .npm
-lib
+
 coverage
+node_modules
+lib
