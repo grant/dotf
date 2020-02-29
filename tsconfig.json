@@ -4,15 +4,17 @@
     "rootDir": "src",
     "outDir": "lib",
     "declaration": true,
-    "target": "es2015",
+    "esModuleInterop": true,
+    "importHelpers": true, // will cause runtime error if `tslib` is necessary
+    "target": "ES2017",
     "lib": [
       "ESNext"
     ],
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
     "strict": true,
-    // "inlineSourceMap": true,
+    "module": "commonjs",
+    "moduleResolution": "node"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
