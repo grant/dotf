@@ -1,12 +1,12 @@
 # Custom Ignored Files
 .myignore
 
+coverage
+node_modules
+lib
+
 # Other Ignored Files
 logs
 *.log
 npm-debug.log*
 .npm
-
-coverage
-node_modules
-lib
