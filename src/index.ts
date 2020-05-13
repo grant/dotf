@@ -9,13 +9,13 @@ const { access, chmod, unlink } = promises;
  * A convenient object to interact with dot files
  */
 export interface Dotfile {
-  /** delete the file */
+  /** Delete the file */
   delete: () => Promise<void>;
-  /** check if the file exists */
+  /** Check if the file exists */
   exists: () => Promise<boolean>;
-  /** read the content of the file */
+  /** Read the content of the file */
   read: <T = object>() => Promise<T>;
-  /** write the content of the file */
+  /** Write the content of the file */
   write: <T = object>(obj: T) => Promise<T>;
 }
 
@@ -31,28 +31,36 @@ const dotf = (dirname: string, name: string): Dotfile => {
     throw new Error('Both name and dirname parameters are required');
   }
 
-  if (dirname[0] === '~') {
+  if (dirname.startsWith('~')) {
     dirname = homedir();
   }
 
   const fullpath = join(dirname, `.${name}`);
 
   return {
-    delete: () => unlink(fullpath),
-    exists: async () =>
-      access(fullpath)
-        .then(() => true)
-        .catch(() => false),
-    read: () => readFile(fullpath),
+    delete: async () => unlink(fullpath),
+    exists: async () => {
+      try {
+        await access(fullpath);
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    read: async () => readFile(fullpath),
     write:
       process.platform === 'win32'
-        ? // if a platform is not Windows(include x64)
-          (obj) => writeFile(fullpath, obj).then(() => obj)
-        : (obj) =>
-            writeFile(fullpath, obj)
-              // same as chmod 600
-              .then(() => chmod(fullpath, constants.S_IRUSR | constants.S_IWUSR))
-              .then(() => obj),
+        ? // If a platform is not Windows(include x64)
+          async (object) => {
+            await writeFile(fullpath, object);
+            return object;
+          }
+        : async (object) => {
+            await writeFile(fullpath, object);
+            // Same as chmod 600
+            await chmod(fullpath, constants.S_IRUSR | constants.S_IWUSR);
+            return object;
+          },
   };
 };
 
