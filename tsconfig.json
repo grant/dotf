@@ -20,7 +20,7 @@
     "target": "ES2017",
     "lib": ["ESNext"],
     "newLine": "lf",
-    "noEmitOnError": true,
+    // "noEmitOnError": true,
     "sourceMap": true,
     "moduleResolution": "node",
     "module": "commonjs",
