@@ -14,9 +14,9 @@ export interface Dotfile {
   /** Check if the file exists */
   exists: () => Promise<boolean>;
   /** Read the content of the file */
-  read: <T = object>() => Promise<T>;
+  read: <T = Record<string, unknown>>() => Promise<T>;
   /** Write the content of the file */
-  write: <T = object>(obj: T) => Promise<T>;
+  write: <T = Record<string, unknown>>(obj: T) => Promise<T>;
 }
 
 /**
