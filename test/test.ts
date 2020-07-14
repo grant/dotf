@@ -7,7 +7,6 @@ import dotf from '../src';
 
 // Creates
 // TODO Make this test simpler
-// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 test('write', async (t) => {
   // Overwrite data
   const dotglobalfullpath = join(homedir(), '.myrc1');
@@ -37,7 +36,6 @@ test('write', async (t) => {
   await dotlocal.delete();
 });
 
-// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 test('exists', async (t) => {
   const dotglobal = dotf('~', 'myrc2'); // Global (~)
   const dotlocal = dotf(__dirname, 'myignore2'); // Local (./)
@@ -54,7 +52,6 @@ test('exists', async (t) => {
   await dotlocal.delete();
 });
 
-// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 test('read', async (t) => {
   const dotglobal = dotf('~', 'myrc3'); // Global (~)
   const dotlocal = dotf(__dirname, 'myignore3'); // Local (./)
@@ -71,7 +68,6 @@ test('read', async (t) => {
   await dotlocal.delete();
 });
 
-// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 test('delete', async (t) => {
   const dotglobal = dotf('~', 'myrc4'); // Global (~)
   const dotlocal = dotf(__dirname, 'myignore4'); // Local (./)
