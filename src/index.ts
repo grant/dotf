@@ -16,7 +16,7 @@ export interface Dotfile {
   /** Read the content of the file */
   read: <T = Record<string, unknown>>() => Promise<T>;
   /** Write the content of the file */
-  write: <T = Record<string, unknown>>(obj: T) => Promise<T>;
+  write: <T = Record<string, unknown>>(object: T) => Promise<T>;
 }
 
 /**
