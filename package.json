@@ -1,7 +1,7 @@
 {
   "name": "dotf",
   "description": "Dotfile manager",
-  "version": "1.5.5",
+  "version": "2.0.0",
   "type": "module",
   "files": [
     "lib"
