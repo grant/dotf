@@ -1,9 +1,11 @@
-import { constants, promises } from 'graceful-fs';
-import { readFile, writeFile } from 'jsonfile';
+import fs from 'graceful-fs';
+import jsonfile from 'jsonfile';
 import { homedir } from 'os';
 import { join } from 'path';
 
+const { constants, promises } = fs;
 const { access, chmod, unlink } = promises;
+const { readFile, writeFile } = jsonfile;
 
 /**
  * A convenient object to interact with dot files
@@ -65,7 +67,3 @@ const dotf = (dirname: string, name: string): Dotfile => {
 };
 
 export default dotf;
-
-// For CommonJS default export support
-module.exports = dotf;
-Object.defineProperty(module.exports, 'default', { enumerable: false, value: dotf });
