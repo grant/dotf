@@ -1,7 +1,7 @@
 {
   "name": "dotf",
   "description": "Dotfile manager",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "license": "MIT",
   "author": "Grant Timmerman",
   "repository": {
