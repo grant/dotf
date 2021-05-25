@@ -17,22 +17,18 @@
     "noUnusedParameters": true,
     "suppressExcessPropertyErrors": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "ES2017",
+    "target": "ES2019",
     "lib": ["ESNext"],
     "newLine": "lf",
     // "noEmitOnError": true,
     "sourceMap": true,
     "moduleResolution": "node",
-    "module": "commonjs",
-    "rootDir": "src",
+    "module": "ES2020",
     "outDir": "lib",
     "declaration": true,
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "importHelpers": true // canary: will cause runtime error if `tslib` is necessary
-  },
-  "include": [
-    "src"
-  ]
+  }
 }

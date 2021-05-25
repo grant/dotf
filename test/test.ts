@@ -1,9 +1,12 @@
 import test from 'ava';
 import fs from 'graceful-fs';
 import { homedir } from 'os';
-import { join } from 'path';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
-import dotf from '../src';
+import dotf from '../src/index.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Creates
 // TODO Make this test simpler
