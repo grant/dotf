@@ -1,9 +1,8 @@
-import test from 'ava';
-import fs from 'graceful-fs';
 import { homedir } from 'os';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-
+import fs from 'graceful-fs';
+import test from 'ava';
 import dotf from '../src/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

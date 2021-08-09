@@ -1,7 +1,7 @@
-import fs from 'graceful-fs';
-import jsonfile from 'jsonfile';
 import { homedir } from 'os';
 import { join } from 'path';
+import fs from 'graceful-fs';
+import jsonfile from 'jsonfile';
 
 const { constants, promises } = fs;
 const { access, chmod, unlink } = promises;
