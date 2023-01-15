@@ -1,5 +1,4 @@
-<h1>dotf <a href="https://travis-ci.org/grant/dotf"><img src="https://travis-ci.org/grant/dotf.svg?branch=master" alt="Build Status"></a> <a href="https://www.npmjs.com/package/dotf"><img src="https://img.shields.io/npm/v/dotf.svg" alt="npm Version"></a>
-</h1>
+# dotf [![Node.js CI](https://github.com/grant/dotf/actions/workflows/ci.yml/badge.svg)](https://github.com/grant/dotf/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/dotf.svg)](https://www.npmjs.com/package/dotf)
 
 Manage multiple dotfiles.
 
