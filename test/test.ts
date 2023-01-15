@@ -1,6 +1,7 @@
-import { homedir } from 'os';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import process from 'node:process';
+import { homedir } from 'node:os';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import fs from 'graceful-fs';
 import test from 'ava';
 import dotf from '../src/index.js';

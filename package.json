@@ -34,15 +34,15 @@
     "jsonfile": "^6.1.0"
   },
   "devDependencies": {
-    "@types/graceful-fs": "^4.1.5",
-    "@types/jsonfile": "^6.1.0",
-    "@types/node": "^18.0.6",
-    "ava": "^5.0.0",
+    "@types/graceful-fs": "^4.1.6",
+    "@types/jsonfile": "^6.1.1",
+    "@types/node": "^18.11.18",
+    "ava": "^5.1.0",
     "c8": "^7.12.0",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.3",
     "ts-node": "^10.9.1",
-    "typescript": "^4.7.4",
-    "xo": "^0.50.0"
+    "typescript": "^4.9.4",
+    "xo": "^0.53.1"
   },
   "ava": {
     "extensions": {
@@ -54,10 +54,7 @@
     "nodeArguments": [
       "--loader=ts-node/esm",
       "--experimental-specifier-resolution=node"
-    ],
-    "nonSemVerExperiments": {
-      "configurableModuleFormat": true
-    }
+    ]
   },
   "xo": {
     "ignores": [
@@ -65,8 +62,10 @@
     ],
     "space": 2,
     "rules": {
-      "node/prefer-global/process": "warn",
-      "unicorn/prefer-node-protocol": "warn"
+      "no-bitwise": "off",
+      "unicorn/prefer-node-protocol": "warn",
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "object-shorthand": "off"
     },
     "prettier": true
   }

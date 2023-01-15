@@ -1,5 +1,6 @@
-import { homedir } from 'os';
-import { join } from 'path';
+import process from 'node:process';
+import { homedir } from 'node:os';
+import { join } from 'node:path';
 import fs from 'graceful-fs';
 import jsonfile from 'jsonfile';
 
