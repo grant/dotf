@@ -15,7 +15,6 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "suppressExcessPropertyErrors": true,
     "target": "ES2019",
     "lib": ["ESNext"],
     "newLine": "lf",
