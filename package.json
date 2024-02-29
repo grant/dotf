@@ -37,7 +37,7 @@
     "@types/graceful-fs": "^4.1.6",
     "@types/jsonfile": "^6.1.1",
     "@types/node": "^20.0.0",
-    "ava": "^5.1.0",
+    "ava": "^6.1.2",
     "c8": "^9.0.0",
     "prettier": "^2.8.3",
     "ts-node": "^10.9.1",
